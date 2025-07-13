@@ -8,8 +8,60 @@
     <script type="module" src="/scripts/js/main.js"></script>
 </head>
 <body>
-    <div class="container">
-        <button class="start-process">Click me!</button>
-    </div>
+    <header id="header">
+        <h1>Discord Fix UI</h1>
+    </header>
+    
+    <button id="power">
+        <div class="content">
+            <img src="/images/icons/power-icon.svg" alt="power-icon">
+            <span class="on">Enabled</span>
+            <span class="off">Disabled</span>
+        </div>
+    </button>
+
+    <droplist id="active-bat">
+        <div class="active">
+            <span>-</span>
+            <img src="/images/icons/droplist-icon.svg" alt=">">
+        </div>
+        <div class="container">
+            <!-- <div>
+                <input id="bat-name-8912648t-1" name="bat-name" value="general" type="radio">
+                <label for="bat-name-8912648t-1">general</label>
+            </div>
+            <div>
+                <input id="bat-name-8912648t-2" name="bat-name" value="general (ALT)" type="radio">
+                <label for="bat-name-8912648t-2">general (ALT)</label>
+            </div>
+            <div>
+                <input id="bat-name-8912648t-3" name="bat-name" value="general (ALT2)" type="radio">
+                <label for="bat-name-8912648t-3">general (ALT2)</label>
+            </div>
+            <div>
+                <input id="bat-name-8912648t-4" name="bat-name" value="general (ALT3)" type="radio">
+                <label for="bat-name-8912648t-4">general (ALT3)</label>
+            </div>
+            <div>
+                <input id="bat-name-8912648t-5" name="bat-name" value="general (ALT4)" type="radio" checked>
+                <label for="bat-name-8912648t-5">general (ALT4)</label>
+            </div>
+            <div>
+                <input id="bat-name-8912648t-6" name="bat-name" value="general (ALT5)" type="radio">
+                <label for="bat-name-8912648t-6">general (ALT5)</label>
+            </div> -->
+        </div>
+        <script>
+            document.getElementById('active-bat').onclick = (e) => {
+                if (e.target.tagName === "LABEL") {
+                    let input = document.getElementById(e.target.htmlFor);
+
+                    if (input) {
+                        document.getElementById('active-bat').querySelector('.active span').textContent = e.target.textContent;
+                    }
+                }
+            };
+        </script>
+    </droplist>
 </body>
 </html>

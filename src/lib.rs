@@ -6,8 +6,8 @@ pub mod prelude;     use prelude::*;
 
 pub mod runner;      pub use runner::Runner;
 
-pub static LOGGER: Lazy<Logger> = Lazy::new(|| Logger::new());
-pub static CONFIG: Lazy<Arc<Mutex<Config>>> = Lazy::new(|| Config::new("/config.json").unwrap_or_default());
+pub static LOGGER: Lazy<Logger> = Lazy::new(|| Logger::new("/logs", 20));
+pub static CONFIG: Lazy<Arc<StdMutex<Config>>> = Lazy::new(|| Config::new("/config.json").unwrap_or_default());
 pub static APP_HANDLE: Lazy<Arc<StdMutex<Option<tauri::AppHandle>>>> = Lazy::new(|| Arc::new(StdMutex::new(None)));
 pub static SYSTEM_TRAY: Lazy<Arc<StdMutex<Option<Tray>>>> = Lazy::new(|| Arc::new(StdMutex::new(None)));
 

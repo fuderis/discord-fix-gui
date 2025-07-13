@@ -4,27 +4,34 @@ use std::os::windows::process::CommandExt;
 
 const CREATE_NO_WINDOW: u32 = 0x08000000;
 
-// Discord Fix runner
+// Discord fix runner
 #[derive(Debug)]
 pub struct Runner {
-    enabled: Arc<Mutex<bool>>,
-    to_close: Arc<Mutex<bool>>,
-    process: Arc<Mutex<Option<Child>>>
+    enabled: Arc<StdMutex<bool>>,
+    to_close: Arc<StdMutex<bool>>,
+    closed_unsafe: Arc<StdMutex<bool>>,
+    process: Arc<StdMutex<Option<Child>>>
 }
 
 impl Runner {
-    // Creates a new Discord Fix runner
+    // Creates a new discord fix runner
     pub fn new() -> Self {
         Self {
-            to_close: Arc::new(Mutex::new(false)),
-            enabled: Arc::new(Mutex::new(false)),
-            process: Arc::new(Mutex::new(None))
+            enabled: Arc::new(StdMutex::new(false)),
+            to_close: Arc::new(StdMutex::new(false)),
+            closed_unsafe: Arc::new(StdMutex::new(false)),
+            process: Arc::new(StdMutex::new(None))
         }
+    }
+
+    // Returns process status
+    pub async fn is_enabled(&self) -> bool {
+        *self.enabled.lock().unwrap()
     }
 
     // Read .bat file arguments
     fn parse_bat_args(bat_name: &str) -> Result<Vec<String>> {
-        let path = path!("/bin/DiscordFix/pre-configs/{bat_name}.bat");
+        let path = path!("/bin/DiscordFix/pre-configs/{bat_name}{}", if !bat_name.ends_with(".bat") {".bat"}else{""});
         let content = fs::read_to_string(path)?;
 
         // parse variables:
@@ -39,8 +46,6 @@ impl Runner {
             );
             vars.insert(name, value);
         }
-
-        dbg!(&vars);
 
         // parse arguments:
         let args = if let Some((_first, other)) = content.split_once("winws.exe\" ") {
@@ -60,48 +65,69 @@ impl Runner {
             return Err(Error::FailedParseBatFile(bat_name.to_owned()).into())
         };
 
-        dbg!(&args);
         Ok(args)
     }
 
     // Runs discord fix
     pub async fn run(&self) -> Result<()> {
-        *self.enabled.lock().await = true;
-
         // get active bat name:
-        let bat_name = CONFIG.lock().await.active_bat.clone();
+        let bat_name = CONFIG.lock().unwrap().active_bat.clone();
         let args = Self::parse_bat_args(&bat_name)?;
 
-        // run Discord Fix process:
-        *self.process.lock().await = Some(
-            Command::new(&path!("/bin/DiscordFix/bin/winws.exe"))
+        // run discord fix process:
+        let mut process = Command::new(&path!("/bin/DiscordFix/bin/winws.exe"))
                 .args(&args)
-                // .creation_flags(CREATE_NO_WINDOW)
+                .creation_flags(CREATE_NO_WINDOW)
                 .stdout(Stdio::inherit())
                 .stderr(Stdio::inherit())
-                .spawn()?
-        );
+                .spawn()?;
+
+        // check process to alive:
+        if let Some(status) = process.try_wait()? {
+            if !status.success() {
+                return Err(Error::FailedRunWinwsProcess.into());
+            }
+        }
+
+        *self.process.lock().unwrap() = Some(process);
+
+        emit_event("process-runned", HashMap::<&str, &str>::new());
+        *self.enabled.lock().unwrap() = true;
+        if let Some(tray) = SYSTEM_TRAY.lock().unwrap().as_mut() {
+            tray.set_icon("icon.ico")?;
+        }
         
-        let to_close = self.to_close.clone();
         let enabled = self.enabled.clone();
+        let to_close = self.to_close.clone();
+        let closed_unsafe = self.closed_unsafe.clone();
         let process = self.process.clone();
         
         // waiting closing process:
         tokio::spawn(async move {
             loop {
                 // checking status for enabled:
-                if *to_close.lock().await {
+                if *to_close.lock().unwrap() {
                     break;
                 }
 
                 sleep(Duration::from_millis(100)).await;
             }
 
-            // killing Discord Fix process:
-            if let Some(mut process) = process.lock().await.take() {
+            // killing discord fix process:
+            if let Some(mut process) = process.lock().unwrap().take() {
                 let _ = process.kill();
                 let _ = process.wait();
-                *enabled.lock().await = false;
+
+                if !*closed_unsafe.lock().unwrap() {
+                    emit_event("process-stopped", HashMap::<&str, &str>::new());
+                    
+                    *to_close.lock().unwrap() = false;
+                    *enabled.lock().unwrap() = false;
+
+                    if let Some(tray) = SYSTEM_TRAY.lock().unwrap().as_mut() {
+                        tray.set_icon("icon2.ico").unwrap();
+                    }
+                }
             }
         });
 
@@ -110,12 +136,19 @@ impl Runner {
 
     // Stops discord fix
     pub async fn stop(&self) -> Result<()> {
-        *self.to_close.lock().await = true;
+        *self.to_close.lock().unwrap() = true;
 
-        while *self.enabled.lock().await {
+        while *self.enabled.lock().unwrap() && self.process.lock().unwrap().is_some() {
             sleep(Duration::from_millis(100)).await;
         }
 
         Ok(())
+    }
+
+    // Stops discord fix (unsafe variant)
+    pub fn stop_unsafe(&self) {
+        *self.to_close.lock().unwrap() = true;
+        *self.closed_unsafe.lock().unwrap() = true;
+        std_sleep(Duration::from_millis(1000));
     }
 }

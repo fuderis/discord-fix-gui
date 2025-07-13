@@ -69,20 +69,133 @@ input[type=submit] {
   cursor: pointer;
 }
 
+/* THIN */
 @font-face {
-  font-family: "Roboto Flex";
-  src: url("../../fonts/roboto-flex.ttf") format("truetype");
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-ThinItalic.ttf") format("truetype");
+  font-weight: 100;
+  font-style: italic;
+}
+/* EXTRA LIGHT */
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-ExtraLightItalic.ttf") format("truetype");
+  font-weight: 200;
+  font-style: italic;
+}
+/* LIGHT */
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+/* REGULAR */
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+/* MEDIUM */
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+/* SEMIBOLD */
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-SemiBoldItalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+/* BOLD */
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+/* EXTRA BOLD */
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-ExtraBoldItalic.ttf") format("truetype");
+  font-weight: 800;
+  font-style: italic;
+}
+/* BLACK */
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Saira";
+  src: url("../../fonts/Saira/Saira-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
 }
 body {
   color: #ffffff;
-  font-family: "Roboto Flex";
-  font-size: 14px;
+  font-family: "Saira";
+  font-size: 15px;
   font-weight: 400;
   background-color: #111117;
 }
 
 h1 {
-  font-size: 25px;
+  font-size: 17px;
   font-weight: 900;
 }
 
@@ -119,20 +232,11 @@ button {
   width: 120px;
   height: 30px;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   background: #00BBFF;
   border-radius: 15px;
-  transition: transform 200ms ease;
-  transform-origin: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
   box-shadow: 0 1px 10px rgba(0, 187, 255, 0.2);
-}
-button:hover, button:focus {
-  transform: scale(1.05);
-}
-button:active {
-  transform: translateY(2px);
 }
 button[disabled] {
   pointer-events: none;
@@ -145,7 +249,7 @@ input {
   height: 30px;
   padding: 0 7px;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   background: #2A2A35;
   border: 1px solid transparent;
@@ -171,13 +275,36 @@ field {
 <droplist>
   <button>Hover me!</button>
   <div class="container">
-    Hello, World!
+    <div>
+      <input id="option-1" name="option" value="Option1"  type="radio"checked>
+      <label for="option-1">Option1</label>
+    </div>
+    <div>
+      <input id="option-2" name="option" value="Option2" type="radio">
+      <label for="option-2">Option2</label>
+    </div>
+    <div>
+      <input id="option-3" name="option" value="Option3" type="radio">
+      <label for="option-3">Option3</label>
+    </div>
   </div>
 </droplist>
 */
 droplist {
   display: flex;
   position: relative;
+  cursor: pointer;
+}
+droplist:hover > .container {
+  display: flex;
+  opacity: 1;
+}
+droplist .active {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 droplist .container {
   display: none;
@@ -185,84 +312,16 @@ droplist .container {
   width: 100%;
   height: auto;
   position: absolute;
-  top: 0;
   left: 0;
-  margin-top: 30px;
   width: 100%;
   height: auto;
   z-index: 99;
-}
-droplist:hover ~ .container, droplist:focus ~ .container {
-  display: flex;
-  opacity: 1;
-}
-
-/*
-<selector>
-  <div class="container">
-    <div>
-      <input id="option-1" name="option" type="radio" value="Option1" checked>
-      <label for="option-1">Option1</label>
-    </div>
-    <div>
-      <input id="option-2" name="option" type="radio" value="Option2">
-      <label for="option-2">Option2</label>
-    </div>
-    <div>
-      <input id="option-3" name="option" type="radio" value="Option3">
-      <label for="option-3">Option3</label>
-    </div>
-  </div>
-</selector>
-*/
-selector {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 30px;
-  position: relative;
   overflow-x: hidden;
   overflow-y: auto;
 }
-selector .container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  max-height: 200px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
-selector .container > * {
-  display: flex;
-  width: 100%;
-  height: auto;
-  background: none;
-  user-select: none;
-  cursor: pointer;
-}
-selector .container > * input {
+droplist input[type=checkbox],
+droplist input[type=radio] {
   display: none;
-}
-selector .container > * input:checked ~ label {
-  display: flex;
-  pointer-events: none;
-}
-selector .container > * label {
-  display: none;
-  justify-content: flex-start;
-  width: 100%;
-  height: auto;
-}
-selector:hover .container, selector:focus .container {
-  overflow-y: auto;
-  z-index: 99;
-}
-selector:hover .container > *, selector:focus .container > * {
-  display: flex;
 }
 
 /*
@@ -326,19 +385,127 @@ choice label img {
   height: auto;
 }
 
-.container {
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 50px;
+  background: linear-gradient(0deg, #0C102B 0%, #1A103D 54%, #060816 100%);
+}
+
+header#header {
+  justify-content: center;
+}
+header#header h1 {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+button#power {
+  justify-content: center;
+  align-items: center;
+  width: 230px;
+  height: 230px;
+  background: linear-gradient(180deg, #5686FF 0%, #576DFF 51%, #3E56F6 100%);
+  border-radius: 50%;
+  box-shadow: inset 0px 2px 0px 0px rgba(255, 255, 255, 0.25), 0px 0px 81.4000015259px 0px rgba(49, 62, 207, 0.7), 0px 0px 100px 0px rgba(0, 0, 0, 0.3);
+}
+button#power:hover .content {
+  transform: scale(1.05);
+}
+button#power:active .content {
+  transform: translateY(2px);
+}
+button#power .content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  width: 178px;
+  height: 178px;
+  position: relative;
+  background: linear-gradient(180deg, #FF56BB 0%, #EA486B 51%, #D98C20 100%);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  transition: transform 200ms ease;
+  transform-origin: center;
 }
-.container img {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 21px;
+button#power .content::after {
+  content: "";
+  display: block;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 3px;
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 50%;
+  z-index: 1;
 }
-.container p {
-  margin: 7px;
+button#power .content > * {
+  z-index: 9;
+}
+button#power .content img {
+  width: 72px;
+  height: 72px;
+}
+button#power .content span {
+  font-size: 15px;
+}
+button#power .content span.on {
+  display: none;
+}
+button#power .content span.off {
+  display: inline-block;
+}
+button#power.enabled .content {
+  background: linear-gradient(180deg, #27FBFB 0%, #B1F532 51%, #51D920 100%);
+}
+button#power.enabled span.on {
+  display: inline-block;
+}
+button#power.enabled span.off {
+  display: none;
+}
+
+droplist#active-bat {
+  width: 220px;
+  height: 35px;
+  background: linear-gradient(180deg, #5686FF 0%, #576DFF 51%, #3E56F6 100%);
+  border-radius: 9px;
+  box-shadow: inset 0px 2px 0px 0px rgba(255, 255, 255, 0.25);
+}
+droplist#active-bat[disabled] {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.7;
+}
+droplist#active-bat .active {
+  padding: 0 15px;
+}
+droplist#active-bat .active img {
+  width: 10px;
+  height: 10px;
+}
+droplist#active-bat .container {
+  max-height: 200px;
+  bottom: 0;
+  padding: 5px 15px;
+  background: linear-gradient(180deg, #5686FF 0%, #576DFF 51%, #3E56F6 100%);
+  border-radius: 9px;
+  box-shadow: inset 0px 2px 0px 0px rgba(255, 255, 255, 0.25);
+}
+droplist#active-bat .container label {
+  line-height: 16px;
+  padding: 5px 0;
+  transition: opacity 200ms ease-out;
+}
+droplist#active-bat .container label:hover {
+  opacity: 0.7;
+}
+droplist#active-bat .container input:checked ~ label {
+  opacity: 0.7;
 }

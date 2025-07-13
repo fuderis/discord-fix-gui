@@ -18,5 +18,6 @@ pub use std::collections::HashMap;
 pub use std::path::{ Path, PathBuf };
 pub use std::sync::Arc;
 pub use std::sync::Mutex as StdMutex;
+pub use std::thread::sleep as std_sleep;
 pub use tokio::sync::Mutex;
 pub use tokio::time::{ sleep, Duration, Instant, Interval };

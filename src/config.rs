@@ -20,7 +20,7 @@ impl ::std::default::Default for Config {
 
 impl Config {
     /// Reads/writes config file
-    pub fn new<P: AsRef<Path>>(path: P) -> Result<Arc<Mutex<Self>>> {
+    pub fn new<P: AsRef<Path>>(path: P) -> Result<Arc<StdMutex<Self>>> {
         let path = path!(path.as_ref());
         
         // reading config file:
@@ -35,7 +35,7 @@ impl Config {
             cfg
         };
 
-        Ok(Arc::new(Mutex::new( config )))
+        Ok(Arc::new(StdMutex::new( config )))
     }
     
     /// Reads config from file

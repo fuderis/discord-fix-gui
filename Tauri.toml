@@ -11,7 +11,7 @@ withGlobalTauri = true
 [[app.windows]]
 url = "views/main.html"
 title = "Discord Fix UI"
-width = 1000
+width = 450
 height = 650
 resizable = true
 fullscreen = false
@@ -31,5 +31,6 @@ icon = [
 ]
 resources = [
   "bin",
-  "icon.ico"
+  "icon.ico",
+  "icon2.ico"
 ]

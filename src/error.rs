@@ -14,6 +14,12 @@ pub enum Error {
     #[from]
     Logger(log::SetLoggerError),
 
+    #[display = "Failed to read .bat files list: {0}"]
+    FailedReadBatsList(Box<dyn std::error::Error + Send + Sync + 'static>),
+    
     #[display = "Failed to read '{0}.bat' file"]
     FailedParseBatFile(String),
+
+    #[display = "Failed to run winws.exe process, check the permissions"]
+    FailedRunWinwsProcess,
 }

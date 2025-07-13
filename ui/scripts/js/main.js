@@ -34,6 +34,18 @@ class Node {
             this.elem.setAttribute(name, value)
         }
     }
+    // Check attribute for exists
+    has_attr(name) {
+        return this.elem.getAttribute(name) !== undefined;
+    }
+    // Set attribute
+    set_attr(name, value) {
+        this.elem.setAttribute(name, value)
+    }
+    // Remove attribute
+    remove_attr(name) {
+        this.elem.removeAttribute(name)
+    }
 
     // Get/set ID
     id(name) {
@@ -43,14 +55,34 @@ class Node {
             this.elem.setAttribute("id", name)
         }
     }
+    // Set ID
+    set_id(value) {
+        this.elem.setAttribute("id", value)
+    }
+    // Remove ID
+    remove_id() {
+        this.elem.removeAttribute("id")
+    }
 
-    // Get/set class
+    // Get/Check class list
     class(name) {
         if (name === undefined) {
             return this.elem.classList;
         } else {
-            this.elem.classList.add(name);
+            return this.elem.classList.contains(name);
         }
+    }
+    // Check class name for exists
+    has_class(name) {
+        return this.elem.classList.contains(name);
+    }
+    // Add class name
+    set_class(name) {
+        this.elem.classList.add(name);
+    }
+    // Remove class name
+    remove_class(name) {
+        this.elem.classList.remove(name);
     }
 
     // Get/set text contents value
@@ -86,7 +118,7 @@ class Node {
     }
 
     // Insert node
-    insert(index, node) {
+    insert(node, index) {
         let elem = node instanceof Node ? node.elem : node;
         if (!(elem instanceof Element)) {
             throw new Error("The node must be an instance of a Node or a DOM element.");
@@ -241,25 +273,67 @@ class Forms {
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Start process
-    new Node('#power').event('click', () => {
-        invoke("start_process", { name: "Developer" })
-            .then(name => {
-                new Node("#power").class("enabled");
+events.listen("process-runned", ({ payload }) => {
+    let power_button = new Node("#power");
 
-                console.log(`The process '${name}' is started!`);
-            })
+    power_button.set_class("enabled");
+    power_button.remove_attr("disabled");
+    new Node("#active-bat").set_attr("disabled");
+});
+
+events.listen("process-stopped", ({ payload }) => {
+    let power_button = new Node("#power");
+
+    power_button.remove_class("enabled");
+    power_button.remove_attr("disabled");
+    new Node("#active-bat").remove_attr("disabled");
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Get process status:
+    invoke("get_status", {})
+        .then(status => {
+            if (status) {
+                new Node("#power").set_class("enabled");
+            }
+        })
+        .catch(e => console.error(e))
+    
+    // Get .bat files list:
+    invoke("get_bats_list", {})
+        .then(bats => {
+            let container = new Node("#active-bat .container");
+            
+            bats.forEach(bat => {
+                let bat_node = new Node(bat);
+                let bat_input = bat_node.elem.querySelector("input[type=\"radio\"]");
+
+                if (bat_input.checked) {
+                    new Node("#active-bat .active span").text(bat_input.value);
+                }
+
+                container.insert(bat_node, -1);
+            });
+        })
+        .catch(e => console.error(e))
+
+    // Run/Stop process:
+    new Node('#power').event('click', () => {
+        let power_button = new Node("#power");
+        
+        power_button.set_attr("disabled")
+        
+        invoke((power_button.has_class("enabled"))? "stop_process" : "run_process", {})
+            .then(_ => {})
             .catch(e => console.error(e))
     });
-    
-    // Stop process
-    new Node('#power').event('click', () => {
-        invoke("stop_process", { name: "Developer" })
-            .then(name => {
-                new Node("#power").class().remove("enabled");
-                console.log(`The process '${name}' is stopped!`);
-            })
+
+    // Update active .bat:
+    new Node("#active-bat").event("input", (e) => {
+        let batName = e.target.value;
+
+        invoke("set_active_bat", { batName })
+            .then(_ => {})
             .catch(e => console.error(e))
     });
 });

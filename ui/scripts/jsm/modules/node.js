@@ -34,6 +34,18 @@ class Node {
             this.elem.setAttribute(name, value)
         }
     }
+    // Check attribute for exists
+    has_attr(name) {
+        return this.elem.getAttribute(name) !== undefined;
+    }
+    // Set attribute
+    set_attr(name, value) {
+        this.elem.setAttribute(name, value)
+    }
+    // Remove attribute
+    remove_attr(name) {
+        this.elem.removeAttribute(name)
+    }
 
     // Get/set ID
     id(name) {
@@ -43,14 +55,34 @@ class Node {
             this.elem.setAttribute("id", name)
         }
     }
+    // Set ID
+    set_id(value) {
+        this.elem.setAttribute("id", value)
+    }
+    // Remove ID
+    remove_id() {
+        this.elem.removeAttribute("id")
+    }
 
-    // Get/set class
+    // Get/Check class list
     class(name) {
         if (name === undefined) {
             return this.elem.classList;
         } else {
-            this.elem.classList.add(name);
+            return this.elem.classList.contains(name);
         }
+    }
+    // Check class name for exists
+    has_class(name) {
+        return this.elem.classList.contains(name);
+    }
+    // Add class name
+    set_class(name) {
+        this.elem.classList.add(name);
+    }
+    // Remove class name
+    remove_class(name) {
+        this.elem.classList.remove(name);
     }
 
     // Get/set text contents value
@@ -86,7 +118,7 @@ class Node {
     }
 
     // Insert node
-    insert(index, node) {
+    insert(node, index) {
         let elem = node instanceof Node ? node.elem : node;
         if (!(elem instanceof Element)) {
             throw new Error("The node must be an instance of a Node or a DOM element.");

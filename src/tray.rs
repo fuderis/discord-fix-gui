@@ -8,11 +8,11 @@ pub struct Tray {
 
 impl Tray {
     /// Create a new tray-icon
-    pub fn new() -> Self {
+    pub fn new<P: AsRef<Path>>(icon_path: P) -> Self {
         use tauri::tray;
 
         let tray = tray::TrayIconBuilder::new()
-            .icon(tauri::image::Image::from_path(path!("/icon.ico")).unwrap())
+            .icon(tauri::image::Image::from_path(path!("/{}", icon_path.as_ref().to_string_lossy())).unwrap())
             .on_tray_icon_event(|tray, event| {
                 if let tray::TrayIconEvent::Click { button, button_state, .. } = event {
                     if button == tray::MouseButton::Left && button_state == tray::MouseButtonState::Up {
@@ -36,6 +36,18 @@ impl Tray {
         Self {
             tray: Some(tray),
         }
+    }
+
+    /// Change icon
+    pub fn set_icon<P: AsRef<Path>>(&mut self, icon_path: P) -> Result<()> {
+        let icon_path = path!("/{}", icon_path.as_ref().to_string_lossy());
+        
+        if let Some(tray) = &self.tray {
+            let icon = tauri::image::Image::from_path(icon_path)?;
+            tray.set_icon(Some(icon))?;
+        }
+
+        Ok(())
     }
 
     /// Remove tray icon
