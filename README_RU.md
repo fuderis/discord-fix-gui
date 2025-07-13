@@ -7,7 +7,7 @@
 > **Внимание:** это только графическая оболочка для давно известной программы **Discord Fix**.  
 > Скачать оригинальный Discord Fix и узнать подробности можно [здесь](https://howdyho.net/windows-software/discord-fix-snova-rabotayushij-diskord-vojs-zvonki).
 
-> **Скачать _Discord Fix GUI_ для Windows**: [Release v0.1.0](https://github.com/fuderis/discord-fix-gui/raw/main/DiscordFixGUI.zip)
+> **Скачать 'Discord Fix GUI' для Windows**: [Release v0.1.0](https://github.com/fuderis/discord-fix-gui/raw/main/DiscordFixGUI.zip)
 
 
 ## Возможности:

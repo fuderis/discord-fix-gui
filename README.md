@@ -7,7 +7,7 @@ A simple and user-friendly graphical interface for the Discord Fix toolkit — a
 > **Note:** This is only a graphical interface for the well-known **Discord Fix** program.  
 > You can always download the original Discord Fix and learn more about it [here](https://howdyho.net/windows-software/discord-fix-snova-rabotayushij-diskord-vojs-zvonki)[1].
 
-> **Download _Discord Fix GUI_ for Windows**: [Release v0.1.0](https://github.com/fuderis/discord-fix-gui/raw/main/DiscordFixGUI.zip)
+> **Download 'Discord Fix GUI' for Windows**: [Release v0.1.0](https://github.com/fuderis/discord-fix-gui/raw/main/DiscordFixGUI.zip)
 
 
 ## Features:
