@@ -687,6 +687,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "discord-fix-gui"
+version = "0.0.0"
+dependencies = [
+ "chrono",
+ "grass",
+ "log",
+ "macron",
+ "once_cell",
+ "rand 0.8.5",
+ "regex",
+ "serde",
+ "serde_json",
+ "tauri",
+ "tauri-build",
+ "tauri-plugin-prevent-default",
+ "tokio",
+]
+
+[[package]]
 name = "dispatch"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3707,25 +3726,6 @@ dependencies = [
  "futf",
  "mac",
  "utf-8",
-]
-
-[[package]]
-name = "test-app"
-version = "0.0.0"
-dependencies = [
- "chrono",
- "grass",
- "log",
- "macron",
- "once_cell",
- "rand 0.8.5",
- "regex",
- "serde",
- "serde_json",
- "tauri",
- "tauri-build",
- "tauri-plugin-prevent-default",
- "tokio",
 ]
 
 [[package]]

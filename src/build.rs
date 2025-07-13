@@ -14,7 +14,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // prepare JS:
     prepare_js_dir("ui/scripts/jsm", "ui/scripts/js")?;
-    
+
     // build tauri:
     tauri_build::build();
 

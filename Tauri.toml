@@ -1,6 +1,6 @@
-productName = "Discord Fix UI"
+productName = "Discord Fix GUI"
 version = "0.1.0"
-identifier = "com.fuderis.discord-fix-ui"
+identifier = "com.fuderis.discord-fix-gui"
 
 [build]
 frontendDist = "ui"
@@ -10,7 +10,7 @@ withGlobalTauri = true
 
 [[app.windows]]
 url = "views/main.html"
-title = "Discord Fix UI"
+title = "Discord Fix GUI"
 width = 450
 height = 650
 resizable = true

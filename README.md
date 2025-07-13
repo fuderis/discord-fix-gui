@@ -1,31 +1,51 @@
-# UI Application Template
+# Discord Fix GUI
 
-This is a starter template for building modern desktop applications using Tauri and Rust. With this template, you can quickly bootstrap a cross-platform UI app that feels native, is lightweight, and leverages the safety and performance of Rust.
+![Preview](readme/preview.png)
 
+A simple and user-friendly graphical interface for the Discord Fix toolkit — a set of scripts and utilities designed to bypass ISP restrictions and restore access to Discord and other popular services (such as YouTube, Instagram, Telegram) in regions where they are blocked.
 
-## How Does It Work?
+> **Note:** This is only a graphical interface for the well-known **Discord Fix** program.  
+> You can always download the original Discord Fix and learn more about it [here](https://howdyho.net/windows-software/discord-fix-snova-rabotayushij-diskord-vojs-zvonki)[1].
 
-* Tauri acts as a bridge between your web-based frontend (HTML, CSS, JavaScript, or frameworks like React, Svelte, etc.) and a secure, high-performance backend written in Rust.
-* The user interface runs in a minimal webview (not a full browser), making the app fast and resource-efficient.
-* The backend logic, system access, and heavy computations are handled by Rust, ensuring reliability and speed.
-
-
-## Key Features:
-
-* **Cross-platform**: Build for Windows, macOS, and Linux from a single codebase.
-* **Secure**: Tauri restricts access to system APIs, reducing the attack surface.
-* **Tiny footprint**: Tauri apps are much smaller than Electron apps.
-* **Rust-powered**: Get memory safety and performance out of the box.
-* **Customizable**: Use any frontend framework you like.
+> **Download _Discord Fix GUI_ for Windows**: [Release v0.1.0](https://github.com/fuderis/discord-fix-gui/raw/main/DiscordFixGUI.zip)
 
 
-## Why Use This Template?
+## Features:
 
-* **Quick Start**: Skip boilerplate and focus on building features.
-* **Modern Stack**: Combine the best of web technologies and native performance.
-* **Community Support**: Tauri is open-source and rapidly growing.
+* **Easy-to-use interface**: Launch Discord Fix scripts and utilities with just a few clicks.
+* **Service selection**: Quickly choose which service to fix (Discord, YouTube, or both).
+* **Automatic configuration**: Adapts settings for popular Russian ISPs (MGTS, TTK, Beeline, Rostelecom, etc.).
+* **No VPN required**: Only the necessary traffic is routed to bypass restrictions, keeping your connection fast and private.
 
-> Build beautiful, fast, and secure desktop apps with Rust and Tauri—this template is your launchpad!
+
+## How It Works?
+
+* The interface runs the selected Discord Fix scripts in the background.
+* It modifies connection and routing settings to bypass ISP-level blocks, restoring full access to Discord and other selected services.
+* The GUI does not encrypt all your traffic like a VPN, but only applies targeted fixes for blocked services.
+
+
+## Installation:
+
+* Download the [latest release](https://github.com/fuderis/discord-fix-gui/raw/main/DiscordFixGUI.zip).
+* Extract the archive and install application.
+* **IMPORTANT!**: Right-click the program shortcut on your desktop → **_Properties_** → **_Compatibility_** → enable "**_Run this program as administrator_**".
+  *(Without this, the program will not work properly.)*
+* **To add the program to startup:** Press **Win + R**, enter `shell:startup`, and drag the program shortcut into the opened folder.
+
+
+## Usage:
+
+* Make sure to disable any VPNs or proxies before using Discord Fix GUI for best results.
+* Select your ISP from the dropdown menu.
+* Click to center button to apply the configuration and run fixes.
+* Launch YouTube, Discord or your desired service — it should now work without issues.
+
+
+## Troubleshooting:
+
+* **If the fix does not work**: Run the program as administrator.
+* **If that does not help**: It is possible that *Windows Defender* or another antivirus is blocking the application. Try temporarily disabling your antivirus or adding Discord Fix GUI to the exceptions list.
 
 
 ## Feedback:

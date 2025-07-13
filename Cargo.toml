@@ -1,5 +1,5 @@
 [package]
-name = "test-app"
+name = "discord-fix-gui"
 edition = "2024"
 build = "src/build.rs"
 
