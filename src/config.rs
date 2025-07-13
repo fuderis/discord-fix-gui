@@ -13,7 +13,7 @@ impl ::std::default::Default for Config {
     fn default() -> Self {
         Self {
             path: path!("/config.json"),
-            active_bat: str!("general_ALT4.bat")
+            active_bat: str!("General_ALT4.bat")
         }
     }
 }
