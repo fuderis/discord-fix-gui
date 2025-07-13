@@ -33,6 +33,8 @@ A simple and user-friendly graphical interface for the Discord Fix toolkit — a
   *(Without this, the program will not work properly.)*
 * **To add the program to startup:** Press **Win + R**, enter `shell:startup`, and drag the program shortcut into the opened folder.
 
+![Screenshot](readme/screenshot.png)
+
 
 ## Usage:
 
