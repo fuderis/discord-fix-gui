@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(status => {
             if (status) {
                 new Node("#power").set_class("enabled");
+                new Node("#active-bat").set_attr("disabled");
             }
         })
         .catch(e => console.error(e))
